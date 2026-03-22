@@ -1,16 +1,102 @@
-# React + Vite
+# Kubernetes Learning Project 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple React application used as a practical playground for learning Kubernetes concepts hands on with Minikube.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project contains a minimal React frontend paired with a collection of Kubernetes YAML manifests. The goal is not the app itself — it's everything around it. Each YAML file demonstrates a different Kubernetes concept so you can apply them one by one and see the results in real time.
 
-## React Compiler
+## Prerequisites
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Make sure you have the following installed before getting started:
 
-## Expanding the ESLint configuration
+- [Docker](https://www.docker.com/)
+- [Minikube](https://minikube.sigs.k8s.io/docs/start/)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/)
+- [Node.js](https://nodejs.org/) (if running the app locally outside of Kubernetes)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Getting Started
+
+Start your Minikube cluster:
+```bash
+minikube start
+```
+
+Enable the Ingress addon:
+```bash
+minikube addons enable ingress
+```
+
+Add the local domain to your `/etc/hosts` file:
+```bash
+echo "127.0.0.1 myapp.local" | sudo tee -a /etc/hosts
+```
+
+Start the Minikube tunnel (required for Ingress on Mac):
+```bash
+minikube tunnel
+```
+
+## YAML Manifests
+
+Each file in the repo demonstrates a specific Kubernetes concept:
+
+| File | Concept |
+|---|---|
+| `pod.yaml` | Deploying a standalone Pod |
+| `replicaset.yaml` | Managing Pod replicas with a ReplicaSet |
+| `deployment.yaml` | Rolling updates and self healing with a Deployment |
+| `service-clusterip.yaml` | Internal cluster communication with ClusterIP |
+| `service-nodeport.yaml` | Exposing the app externally with NodePort |
+| `service-loadbalancer.yaml` | Load balancing with a LoadBalancer Service |
+| `ingress.yaml` | Routing external HTTP traffic with Ingress |
+
+## Applying the Manifests
+
+Apply any manifest with:
+```bash
+kubectl apply -f <filename>.yaml
+```
+
+Check your pods are running:
+```bash
+kubectl get pods
+```
+
+Check your services:
+```bash
+kubectl get services
+```
+
+Check your ingress:
+```bash
+kubectl get ingress
+```
+
+## Accessing the App
+
+Via NodePort:
+```bash
+minikube service react-service --url
+```
+
+Via Ingress:
+```
+http://myapp.local
+```
+
+## Cleaning Up
+
+To delete all resources:
+```bash
+kubectl delete -f <filename>.yaml
+```
+
+To stop Minikube:
+```bash
+minikube stop
+```
+
+## Related Article
+
+This project accompanies the article **"Kubernetes for Beginners"** which walks through every concept covered here in depth with explanations and real world examples.
