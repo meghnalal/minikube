@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demonamespace
+
+---                    
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: react-pod
+  namespace: demonamespace
+  labels:
+    app: react
+spec:
+  containers:
+  - name: react
+    image: minikube-fe-prod:latest
+    imagePullPolicy: Never
+    ports:
+    - containerPort: 80

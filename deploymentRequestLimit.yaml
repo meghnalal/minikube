@@ -1,0 +1,60 @@
+## Part 1: Deployment (Creates your pods)
+
+# version of kubernetes
+apiVersion: apps/v1
+# Deployment - Run your app
+# Service - Expose your app
+# ConfigMap - Configuration
+# Secret - Passwords/keys
+# Ingress - Domain routing
+
+kind: Deployment
+metadata:
+  name: react-app-minikube
+spec:
+# how many pods to run 
+  replicas: 2
+  # manage all the pods with the label react 
+  selector:
+    matchLabels:
+      app: react
+  # template for creating pods for creating replica
+  template:
+  # react lable applied to each pod
+    metadata:
+      labels:
+        app: react
+    # what to run inside each pod
+    # so each pod will have my image
+    spec:
+      containers:
+      - name: react
+        image: minikube-fe-prod:latest
+        # dont try to download use local image
+        imagePullPolicy: Never
+        # container listen to port 80
+        ports:
+        - containerPort: 80
+        resources:          # 👈 goes here, same level as image and ports
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+---
+
+## Part 2: Service LoadBalancer
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-service
+spec:
+  type: LoadBalancer          
+  selector:
+    app: react           
+  ports:
+  - port: 80              
+    targetPort: 80       
+
