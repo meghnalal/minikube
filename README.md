@@ -44,11 +44,12 @@ Each file in the repo demonstrates a specific Kubernetes concept:
 | File | Concept |
 |---|---|
 | `pod.yaml` | Deploying a standalone Pod |
-| `replicaset.yaml` | Managing Pod replicas with a ReplicaSet |
+| `podnamespace.yaml` | Deploying a standalone Pod under a namespace |
 | `deployment.yaml` | Rolling updates and self healing with a Deployment |
-| `service-clusterip.yaml` | Internal cluster communication with ClusterIP |
-| `service-nodeport.yaml` | Exposing the app externally with NodePort |
-| `service-loadbalancer.yaml` | Load balancing with a LoadBalancer Service |
+| `deploymentClusterIP.yaml` | Internal cluster communication with ClusterIP |
+| `deploymentNodePort.yaml` | Exposing the app externally with NodePort |
+| `deploymentLoadBalancer.yaml` | Load balancing with a LoadBalancer Service |
+| `deploymentRequestLimit.yaml` | Deployment with request and limit  |
 | `ingress.yaml` | Routing external HTTP traffic with Ingress |
 
 ## Applying the Manifests
