@@ -30,6 +30,7 @@ spec:
       containers:
       - name: react
         # commenting instead of using local image using the hub one 
+        # pushing
         # image: minikube-fe-prod:latest
         # # dont try to download use local image
         # imagePullPolicy: Never
