@@ -13,7 +13,7 @@ metadata:
   name: react-app-minikube
 spec:
 # how many pods to run 
-  replicas: 2
+  replicas: 3
   # manage all the pods with the label react 
   selector:
     matchLabels:
