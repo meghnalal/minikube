@@ -29,9 +29,12 @@ spec:
     spec:
       containers:
       - name: react
-        image: minikube-fe-prod:latest
-        # dont try to download use local image
-        imagePullPolicy: Never
+        # commenting instead of using local image using the hub one 
+        # image: minikube-fe-prod:latest
+        # # dont try to download use local image
+        # imagePullPolicy: Never
+        image: meghnalal/react-app:latest
+        imagePullPolicy: Always
         # container listen to port 80
         ports:
         - containerPort: 80
