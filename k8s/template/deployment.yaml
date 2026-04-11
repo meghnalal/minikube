@@ -4,8 +4,17 @@ metadata:
   name: {{ .Values.appName }}
 spec:
   replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: react
   template:
+    metadata:
+      labels:
+        app: react
     spec:
       containers:
       - name: react
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
