@@ -1,0 +1,5 @@
+appName: react-app-minikube
+replicas: 2
+image:
+  repository: meghnalal/react-app
+  tag: latest
